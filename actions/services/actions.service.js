@@ -9,31 +9,31 @@ const DbMixin = require("../mixins/db.mixin");
 
 /** @type {ServiceSchema} */
 module.exports = {
-	name: "products",
+	name: "actions",
 	// version: 1
 
 	/**
 	 * Mixins
 	 */
-	mixins: [DbMixin("products")],
+	mixins: [DbMixin("actions")],
 
 	/**
 	 * Settings
 	 */
 	settings: {
 		// Available fields in the responses
-		fields: [
-			"_id",
-			"name",
-			"quantity",
-			"price"
-		],
+		// fields: [
+		// 	"_id",
+		// 	"name",
+		// 	"quantity",
+		// 	"price"
+		// ],
 
-		// Validator for the `create` & `insert` actions.
-		entityValidator: {
-			name: "string|min:3",
-			price: "number|positive"
-		}
+		// // Validator for the `create` & `insert` actions.
+		// entityValidator: {
+		// 	name: "string|min:3",
+		// 	price: "number|positive"
+		// }
 	},
 
 	/**
@@ -47,9 +47,9 @@ module.exports = {
 			 *
 			 * @param {Context} ctx
 			 */
-			create(ctx) {
-				ctx.params.quantity = 0;
-			}
+			// create(ctx) {
+			// 	ctx.params.quantity = 0;
+			// }
 		}
 	},
 
@@ -73,38 +73,32 @@ module.exports = {
 		/**
 		 * Increase the quantity of the product item.
 		 */
-		increaseQuantity: {
-			rest: "PUT /:id/quantity/increase",
-			params: {
-				id: "string",
-				value: "number|integer|positive"
-			},
+		increment: {
+			rest: "PUT /increment",
 			/** @param {Context} ctx */
 			async handler(ctx) {
-				const doc = await this.adapter.updateById(ctx.params.id, { $inc: { quantity: ctx.params.value } });
-				const json = await this.transformDocuments(ctx, ctx.params, doc);
-				await this.entityChanged("updated", json, ctx);
+				// const doc = await this.adapter.updateById(ctx.params.id, { $inc: { quantity: ctx.params.value } });
+				// const json = await this.transformDocuments(ctx, ctx.params, doc);
+				// await this.entityChanged("updated", json, ctx);
 
-				return json;
+				// return json;
+				ctx.emit('counter.increment');
 			}
 		},
 
 		/**
 		 * Decrease the quantity of the product item.
 		 */
-		decreaseQuantity: {
-			rest: "PUT /:id/quantity/decrease",
-			params: {
-				id: "string",
-				value: "number|integer|positive"
-			},
+		decrement: {
+			rest: "PUT /decrement",
 			/** @param {Context} ctx  */
 			async handler(ctx) {
-				const doc = await this.adapter.updateById(ctx.params.id, { $inc: { quantity: -ctx.params.value } });
-				const json = await this.transformDocuments(ctx, ctx.params, doc);
-				await this.entityChanged("updated", json, ctx);
+				// const doc = await this.adapter.updateById(ctx.params.id, { $inc: { quantity: -ctx.params.value } });
+				// const json = await this.transformDocuments(ctx, ctx.params, doc);
+				// await this.entityChanged("updated", json, ctx);
 
-				return json;
+				// return json;
+				ctx.emit('counter.decrement')
 			}
 		}
 	},
