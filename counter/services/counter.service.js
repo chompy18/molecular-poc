@@ -106,7 +106,7 @@ module.exports = {
 			group: "other",
 			async handler(ctx) {
 				await this.adapter.updateById("t1D70gou15wwscua", {
-					$dec: { quantity: -1 },
+					$inc: { quantity: -1 },
 				});
 				// console.log("Payload:", ctx.params);
 				// console.log("Sender:", ctx.nodeID);
