@@ -16,23 +16,18 @@ module.exports = {
 	 */
 	mixins: [DbMixin("actions")],
 
-
 	/**
 	 * Settings
 	 */
 	settings: {
 		// Available fields in the responses
-		fields: [
-			"_id",
-			"name",
-			"quantity",
-		],
+		fields: ["_id", "name", "quantity"],
 
 		// Validator for the `create` & `insert` actions.
 		entityValidator: {
 			name: "string|min:3",
-			price: "number|positive"
-		}
+			price: "number|positive",
+		},
 	},
 
 	/**
@@ -65,14 +60,14 @@ module.exports = {
 		counter: {
 			rest: {
 				method: "GET",
-				path: "/counter"
+				path: "/counter",
 			},
 			async handler() {
-				return "the counter is 0";
-			}
+				return this.getById("t1D70gou15wwscua");
+			},
 		},
 
-		// /** 
+		// /**
 		//  * Welcome, a username
 		//  *
 		//  * @param {String} name - User name
@@ -94,27 +89,33 @@ module.exports = {
 	 */
 	events: {
 		"counter.increment": {
-            // Register handler to the "other" group instead of "payment" group.
-            group: "other",
-            handler(ctx) {
-                // console.log("Payload:", ctx.params);
-                // console.log("Sender:", ctx.nodeID);
-                // console.log("Metadata:", ctx.meta);
-                // console.log("The called event name:", ctx.eventName);
-            }
-        },
+			// Register handler to the "other" group instead of "payment" group.
+			group: "other",
+			async handler(ctx) {
+				await this.adapter.updateById("t1D70gou15wwscua", {
+					$inc: { quantity: 1 },
+				});
+				// console.log("Payload:", ctx.params);
+				// console.log("Sender:", ctx.nodeID);
+				// console.log("Metadata:", ctx.meta);
+				// console.log("The called event name:", ctx.eventName);
+			},
+		},
 		"counter.decrement": {
-            // Register handler to the "other" group instead of "payment" group.
-            group: "other",
-            handler(ctx) {
-                // console.log("Payload:", ctx.params);
-                // console.log("Sender:", ctx.nodeID);
-                // console.log("Metadata:", ctx.meta);
-                // console.log("The called event name:", ctx.eventName);
-				
+			// Register handler to the "other" group instead of "payment" group.
+			group: "other",
+			async handler(ctx) {
+				await this.adapter.updateById("t1D70gou15wwscua", {
+					$dec: { quantity: -1 },
+				});
+				// console.log("Payload:", ctx.params);
+				// console.log("Sender:", ctx.nodeID);
+				// console.log("Metadata:", ctx.meta);
+				// console.log("The called event name:", ctx.eventName);
+
 				// ctx.emit('counter.updated', { name: "counter", quantity: 0 })
-            }
-        }
+			},
+		},
 	},
 
 	/**
@@ -127,30 +128,22 @@ module.exports = {
 		 * connection establishing & the collection is empty.
 		 */
 		async seedDB() {
-			await this.adapter.insertMany([
-				{ name: "counter", quantity: 0 },
-			]);
-		}
+			await this.adapter.insertMany([{ name: "counter", quantity: 0 }]);
+		},
 	},
 
 	/**
 	 * Service created lifecycle event handler
 	 */
-	created() {
-
-	},
+	created() {},
 
 	/**
 	 * Service started lifecycle event handler
 	 */
-	async started() {
-
-	},
+	async started() {},
 
 	/**
 	 * Service stopped lifecycle event handler
 	 */
-	async stopped() {
-
-	}
+	async stopped() {},
 };

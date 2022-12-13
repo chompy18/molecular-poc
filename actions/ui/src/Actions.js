@@ -2,7 +2,7 @@ import "./App.css";
 
 function Actions() {
 	const increment = () => {
-		fetch("http://localhost:333/api/increment", { method: "PUT" }).then(
+		fetch("http://localhost:3000/api/actions/increment", { method: "PUT" }).then(
 			() => {
 				console.log("increment action done");
 			}
@@ -10,7 +10,7 @@ function Actions() {
 	};
 
 	const decrement = () => {
-		fetch("http://localhost:333/api/decrement", { method: "PUT" }).then(
+		fetch("http://localhost:3000/api/actions/decrement", { method: "PUT" }).then(
 			() => {
 				console.log("decrement action done");
 			}

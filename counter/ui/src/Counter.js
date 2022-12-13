@@ -9,13 +9,16 @@ class App extends React.Component {
 	}
 
 	tick() {
-		return fetch("http://localhost:333/api/count").then((data) =>
-			this.setState({ count: data.count })
-		);
+		fetch("http://localhost:3000/api/counter/counter")
+			.then((res) => res.json())
+			.then((item) => {
+				// console.log("get new count", data);
+				this.setState({ count: item.quantity });
+			});
 	}
 
 	componentDidMount() {
-		this.interval = setInterval(() => this.tick(), 2000);
+		this.interval = setInterval(() => this.tick(), 5000);
 	}
 
 	componentWillUnmount() {

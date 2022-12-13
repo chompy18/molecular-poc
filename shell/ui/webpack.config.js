@@ -7,7 +7,7 @@ module.exports = {
 	entry: "./src/index",
 	mode: "development",
 	devServer: {
-		port: 3000,
+		port: 3003,
         static: {
 			directory: path.join(__dirname, "public"),
 		},
@@ -43,7 +43,7 @@ module.exports = {
 			name: "Host",
 			remotes: {
 				Actions: `Actions@http://localhost:4000/Actions`,
-                // Counter: `Counter@http://localhost:4001/Counter`,
+                Counter: `Counter@http://localhost:4001/Counter`,
 			},
 			// shared: {
 			// 	...dependencies,
@@ -56,12 +56,6 @@ module.exports = {
 			// 		requiredVersion: dependencies["react-dom"],
 			// 	},
 			// },
-		}),
-		new ModuleFederationPlugin({
-			name: "Counter",
-			remotes: {
-                Counter: `Counter@http://localhost:4001/Counter`,
-			},
 		}),
         new HtmlWebpackPlugin({
 			template: "./public/index.html",
