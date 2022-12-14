@@ -2,12 +2,14 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 
 module.exports = {
 	mode: "production",
+
 	plugins: [
 		new ModuleFederationPlugin({
-			name: "Actions",
+			name: "Counter",
 			filename: "remoteEntry.js",
+
 			exposes: {
-				"./Actions": "./src/Actions",
+				"./Counter": "./src/Counter",
 			},
 		}),
 	],

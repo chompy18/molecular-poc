@@ -29,7 +29,7 @@ class App extends React.Component {
 		return (
 			<div className="App">
 				<header className="App-header">
-					<p>COUNT {this.state.count}</p>
+					<p className="counter-ui">COUNT {this.state.count}</p>
 				</header>
 			</div>
 		);

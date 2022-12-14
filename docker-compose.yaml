@@ -5,4 +5,5 @@ services:
     ports:
       - 8081:80
     volumes:
-      - ./actions/ui/dist:/usr/share/nginx/html
+      - ./actions/ui/dist:/usr/share/nginx/html/actions
+      - ./counter/ui/dist:/usr/share/nginx/html/counter
