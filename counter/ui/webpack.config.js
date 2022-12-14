@@ -5,7 +5,7 @@ const { dependencies } = require("./package.json");
 
 module.exports = {
 	entry: "./src/index",
-	mode: "development",
+	mode: "production",
 	devServer: {
     port: 4001,
 		static: {

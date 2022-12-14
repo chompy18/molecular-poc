@@ -9,6 +9,7 @@ function App() {
 			<h1>SHELL</h1>
 			<div className="shell-container">
 				<RemoteActions />
+				{/* <div id="actions"></div> */}
 				<RemoteCounter />
 			</div>
 			{/* <div id="actions"></div>

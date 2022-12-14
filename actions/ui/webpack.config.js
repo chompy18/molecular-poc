@@ -5,7 +5,7 @@ const { dependencies } = require("./package.json");
 
 module.exports = {
 	entry: "./src/index",
-	mode: "development",
+	mode: "production",
 	devServer: {
     port: 4000,
 		static: {
@@ -41,21 +41,21 @@ module.exports = {
 	plugins: [
 		new ModuleFederationPlugin({
 			name: "Actions",
-			filename: "Actions",
+			filename: "remoteEntry.js",
 			exposes: {
 				"./Actions": "./src/Actions",
 			},
-			// shared: {
-			// 	...dependencies,
-			// 	react: {
-			// 		singleton: true,
-			// 		requiredVersion: dependencies["react"],
-			// 	},
-			// 	"react-dom": {
-			// 		singleton: true,
-			// 		requiredVersion: dependencies["react-dom"],
-			// 	},
-			// },
+			shared: {
+				...dependencies,
+				react: {
+					singleton: true,
+					requiredVersion: dependencies["react"],
+				},
+				"react-dom": {
+					singleton: true,
+					requiredVersion: dependencies["react-dom"],
+				},
+			},
 		}),
 		new HtmlWebpackPlugin({
 			template: "./public/index.html",

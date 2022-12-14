@@ -20,10 +20,10 @@ function Actions() {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<div className="App-link" onClick={increment}>
+				<div className="App-link1" onClick={increment}>
 					Increment
 				</div>
-				<div className="App-link" onClick={decrement}>
+				<div className="App-link1" onClick={decrement}>
 					Decrement
 				</div>
 			</header>
