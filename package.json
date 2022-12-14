@@ -1,0 +1,19 @@
+{
+  "name": "molecular-poc",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start:fe": "npm run start:fe:actions & npm run start:fe:counter & npm run start:fe:shell",
+    "start:fe:actions": "cd actions/ui && npm start",
+    "start:fe:counter": "cd counter/ui && npm start",
+    "start:fe:shell": "cd shell/ui && npm start",
+    "start:be": "moleculer-runner --repl --hot */services/**/*.service.js"
+  },
+  "dependencies": {
+    "moleculer-web": "^0.10.4",
+    "moleculer-db": "^0.8.20",
+    "moleculer-db-adapter-mongo": "^0.4.15",
+    "nats": "^2.7.1",
+    "moleculer": "^0.14.26"
+  }
+}
